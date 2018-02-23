@@ -1,13 +1,13 @@
 class SalesController < ApplicationController
     
     def inventoryBySKU
-      @product = Product.find_by(handle: params[:product_handle])
+      @product = Product.find_by(handle: params[:handle])
       @columnNames = self.getColumnNames
       @inventoryByVariant = self.getInventoryByVariantForMonth
     end
 
     def inventoryByProduct
-      @product = Product.find_by(handle: params[:product_handle])
+      @product = Product.find_by(handle: params[:handle])
       @columnNames = self.getColumnNames
       @inventory = self.getInventoryForMonth
     end
@@ -123,6 +123,6 @@ class SalesController < ApplicationController
     end
     
     def allowed_params
-     params.require(:product_handle)
+     params.require(:handle)
     end
 end
