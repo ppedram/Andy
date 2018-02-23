@@ -111,10 +111,10 @@ class SalesController < ApplicationController
         variants.each do |variant|
             data.append(
                 {
-                    "title" => variants.title,
-                    "inventory" => variants.inventory_quantity,
-                    "price" => variants.price,
-                    "date" => variants.created_at
+                    "title" => variant.title,
+                    "inventory" => variant.inventory_quantity,
+                    "price" => variant.price,
+                    "date" => variant.created_at
                 }
             )
         end
