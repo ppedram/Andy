@@ -1,13 +1,13 @@
 class SalesController < ApplicationController
     
     def inventoryBySKU
-      @product = Product.find_by(handle: params[:handle])
+      @product = Product.find_by(handle: params[:product_handle])
       @columnNames = self.getColumnNames
       @inventoryByVariant = self.getInventoryByVariantForMonth
     end
 
     def inventoryByProduct
-      @product = Product.find_by(handle: params[:handle])
+      @product = Product.find_by(handle: params[:product_handle])
       @columnNames = self.getColumnNames
       @inventory = self.getInventoryForMonth
     end
@@ -32,7 +32,7 @@ class SalesController < ApplicationController
             inventory = 0
             # Calculate total inventory of all variants sold
             day.each do |item|
-                inventory += item["inventory_quantity"].to_i
+                inventory += item["inventory].to_i
             end
 
             inventoryByDay.append(inventory)
@@ -67,7 +67,7 @@ class SalesController < ApplicationController
                         variants[item["title"]] = []
                     end
 
-                    variants[item["title"]].append(item["inventory_quantity"])
+                    variants[item["title"]].append(item["inventory])
                 end
             else
               variants.each do |key, value|
@@ -91,7 +91,7 @@ class SalesController < ApplicationController
 
             # Calculate total inventory of all variants sold
             day.each do |item|
-                inventory += item["inventory_quantity"].to_i
+                inventory += item["inventory"].to_i
                 prices.append(item["price"].to_f)
             end
             hash["totalInventory"] = inventory
@@ -123,6 +123,6 @@ class SalesController < ApplicationController
     end
     
     def allowed_params
-     params.require(:handle)
+     params.require(:product_handle)
     end
 end
