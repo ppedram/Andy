@@ -112,7 +112,7 @@ class SalesController < ApplicationController
             data.append(
                 {
                     "title" => variant.title,
-                    "inventory" => variant.inventory_quantity,
+                    "inventory" => inventorylevel.available,
                     "price" => variant.price,
                     "date" => variant.created_at
                 }
